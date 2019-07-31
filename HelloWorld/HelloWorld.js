@@ -88,23 +88,24 @@ function _registerFaceRec() {
     misty.RegisterEvent("FaceRec", "FaceRecognition", 1000, false);
 }
 
-function _faceRec(data) {
+function _FaceRec(data) {
     var faceDetected = data.PropertyTestResults[0].PropertyValue;
 
     misty.Debug("Misty sees "+ faceDetected);
 
-    if (faceDetected == "<Your-Name>") {
+    if (faceDetected == "Elizabeth") {
         misty.DisplayImage("Happy.png");
         misty.PlayAudio("005-Eurra.wav", 30);
         waveRightArm();
     }
-    else {
-        misty.DisplayImage("image0.jpg");
+    else if (faceDetected == "unknown person") {
+        misty.DisplayImage("image0.png");
         misty.PlayAudio("001-OooOooo.wav");
-    }
+    };
 
     misty.RegisterTimerEvent("registerFaceRec", 7000, false);
 }
+
 
 misty.RegisterTimerEvent("look_around", getRandomInt(5, 10) * 1000, false);
 misty.RegisterTimerEvent("breathingLED", 1, false);
